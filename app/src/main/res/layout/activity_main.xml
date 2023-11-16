@@ -355,6 +355,7 @@
                     android:layout_weight="1"
                     android:text="Em alta"
                     android:textColor="@color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -363,6 +364,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Veja Tudo"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/red" />
 
             </LinearLayout>
@@ -413,7 +415,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:layout_weight="1"
-                            android:src="@tools:sample/avatars"
                             app:srcCompat="@drawable/btn_1" />
 
                         <TextView
@@ -424,7 +425,8 @@
                             android:layout_weight="1"
                             android:text="Explorar"
                             android:textAlignment="center"
-                            android:textColor="@color/red" />
+                            android:textColor="@color/red"
+                            tools:ignore="DuplicateIds" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -439,7 +441,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:layout_weight="1"
-                            android:src="@tools:sample/avatars"
                             app:srcCompat="@drawable/btn_2" />
 
                         <TextView
@@ -448,7 +449,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:layout_weight="1"
-                            android:text="Lista"
+                            android:text="Favoritos"
                             android:textAlignment="center"
                             android:textColor="#959595" />
                     </LinearLayout>
@@ -465,7 +466,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:layout_weight="1"
-                            android:src="@tools:sample/avatars"
                             app:srcCompat="@drawable/btn_3" />
 
                         <TextView
@@ -491,7 +491,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:layout_weight="1"
-                            android:src="@tools:sample/avatars"
                             app:srcCompat="@drawable/btn_4" />
 
                         <TextView
