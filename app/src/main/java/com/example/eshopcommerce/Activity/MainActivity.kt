@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val items = ArrayList<PopularDomain>()
         items.add(PopularDomain("MacBook Pro 13 M2 Chip", "", "pic1", 15, 20.0, 4.0))
         items.add(PopularDomain("NinjaBook Pro 13 M2 Chip", "", "pic2", 15, 20.0, 4.0))
-        items.add(PopularDomain("OpeBook Pro 13 M2 Chip", "", "pic3", 15, 20.0, 4.0))
+        items.add(PopularDomain("OpeBook Pro 13 M2 Chip", "", "dog", 15, 20.0, 4.0))
         recyclerViewPopular = findViewById(R.id.view1);
         recyclerViewPopular.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterPopular = PopularListAdapter(items)
