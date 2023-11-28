@@ -378,6 +378,13 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewPopular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
         </LinearLayout>
     </ScrollView>
 
