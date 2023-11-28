@@ -121,7 +121,7 @@
                         android:layout_height="150dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:srcCompat="@drawable/dog" />
+                        app:srcCompat="@drawable/pic1" />
 
                     <TextView
                         android:id="@+id/textView10"
