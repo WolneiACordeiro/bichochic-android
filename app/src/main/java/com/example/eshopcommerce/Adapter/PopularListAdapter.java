@@ -1,5 +1,6 @@
 package com.example.eshopcommerce.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -35,12 +36,18 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PopularListAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull PopularListAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
         holder.titleTxt.setText(items.get(position).getTitle());
         holder.feeTxt.setText("R$"+items.get(position).getPrice());
         holder.scoreTxt.setText(""+items.get(position).getScore());
-        int drawableResourceId=holder.itemView.getResources().getIdentifier(items.get(position).getPicUrl(), "drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext()).load(drawableResourceId).transform(new GranularRoundedCorners(30,30,0,0)).into(holder.pic);
+
+        String imagePath = "file:///android_asset/images/" + items.get(position).getPicUrl();
+
+        Glide.with(holder.itemView.getContext())
+                .load(imagePath)
+                .transform(new GranularRoundedCorners(30, 30, 0, 0))
+                .into(holder.pic);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +57,7 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

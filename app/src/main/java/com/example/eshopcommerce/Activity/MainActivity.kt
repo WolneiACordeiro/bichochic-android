@@ -43,14 +43,16 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerview() {
         val items = ArrayList<PopularDomain>()
         val call = RetrofitService.produtoService.getProdutos()
-        Log.e("API Response", "Resposta da API")
+
+        recyclerViewPopular = findViewById(R.id.recyclerViewPopular)
+
         call.enqueue(object : Callback<List<Produto>> {
             override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
                 if (response.isSuccessful) {
                     val produtos = response.body()
                     produtos?.let {
                         for (produto in it) {
-                            Log.e("API Response", "Resposta da API: ${produto.nome}")
+                            Log.e("API Response", "Resposta da API: ${produto.imagem}")
                             val popularItem = PopularDomain(
                                 produto.nome,
                                 produto.descricao,
@@ -62,11 +64,10 @@ class MainActivity : AppCompatActivity() {
                             items.add(popularItem)
                         }
                         adapterPopular = PopularListAdapter(items)
-                        recyclerViewPopular = findViewById(R.id.recyclerViewPopular)
+
                         recyclerViewPopular.adapter = adapterPopular
                     }
                 } else {
-                    // Log de erro, se necessário
                     Log.e("API Response", "Erro na resposta da API: ${response.code()}")
                 }
             }
@@ -77,5 +78,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 
 }
