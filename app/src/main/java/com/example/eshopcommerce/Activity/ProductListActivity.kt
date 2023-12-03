@@ -58,5 +58,16 @@ class ProductListActivity : AppCompatActivity() {
                 Log.e("API Failure", "Falha na chamada da API", t)
             }
         })
+
+        productAdapter.setOnItemClickListener(object : ProductListAdapter.OnItemClickListener {
+            override fun onDeleteClick(position: Int) {
+                productAdapter.deleteProduct(position);
+            }
+
+            override fun onUpdateClick(position: Int) {
+
+            }
+        });
+
     }
 }

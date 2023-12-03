@@ -1,6 +1,7 @@
 package com.example.eshopcommerce.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eshopcommerce.Entity.Produto;
 import com.example.eshopcommerce.R;
+import com.example.eshopcommerce.Service.ProdutoService;
+import com.example.eshopcommerce.Service.RetrofitService;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
     private List<Produto> products;
@@ -35,6 +42,39 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         this.context = context;
     }
 
+    public void deleteProduct(int position) {
+        String productId = products.get(position).getId();
+        deleteProductApiCall(productId);
+        products.remove(position);
+        notifyItemRemoved(position);
+    }
+    private void deleteProductApiCall(String productId) {
+        // Obtém uma instância do ProdutoService usando Retrofit
+        ProdutoService produtoService = RetrofitService.INSTANCE.getProdutoService();
+
+        // Faz a chamada DELETE para excluir o produto pelo ID
+        Call<Void> call = produtoService.deleteProduto(productId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Produto excluído com sucesso
+                    Log.d("API Response", "Produto excluído com sucesso");
+                } else {
+                    // Tratar resposta não bem-sucedida
+                    Log.e("API Response", "Erro ao excluir produto: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Tratar falha na chamada
+                Log.e("API Failure", "Falha na chamada da API", t);
+            }
+        });
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,12 +85,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Produto product = products.get(position);
-
         holder.txtProductName.setText(product.getNome());
-
-        // Remova as linhas abaixo, pois os elementos não estão no layout item_product
-        // holder.txtProductDescription.setText(product.getDescricao());
-        // holder.txtProductPrice.setText(String.format("R$%s", product.getPreco()));
+        holder.btnDelete.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onDeleteClick(position);
+            }
+        });
     }
 
     @Override
