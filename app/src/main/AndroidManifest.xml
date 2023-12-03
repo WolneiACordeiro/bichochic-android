@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Eshopcommerce"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.AddProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ProductListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.CartActivity"
             android:exported="false" />
         <activity

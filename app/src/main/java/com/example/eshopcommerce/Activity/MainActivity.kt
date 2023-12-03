@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private fun bottom_navigation() {
         val homeBtn: LinearLayout = findViewById(R.id.homeBtn)
         val cartBtn: LinearLayout = findViewById(R.id.cartBtn)
+        val productsBtn: LinearLayout = findViewById(R.id.productsBtn)
 
         homeBtn.setOnClickListener {
             startActivity(Intent(this@MainActivity, MainActivity::class.java))
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
 
         cartBtn.setOnClickListener {
             startActivity(Intent(this@MainActivity, CartActivity::class.java))
+        }
+
+        productsBtn.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ProductListActivity::class.java))
         }
     }
 
@@ -52,7 +57,6 @@ class MainActivity : AppCompatActivity() {
                     val produtos = response.body()
                     produtos?.let {
                         for (produto in it) {
-                            Log.e("API Response", "Resposta da API: ${produto.imagem}")
                             val popularItem = PopularDomain(
                                 produto.nome,
                                 produto.descricao,
