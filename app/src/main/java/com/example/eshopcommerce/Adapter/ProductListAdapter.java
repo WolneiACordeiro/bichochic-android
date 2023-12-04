@@ -49,27 +49,22 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         notifyItemRemoved(position);
     }
     private void deleteProductApiCall(String productId) {
-        // Obtém uma instância do ProdutoService usando Retrofit
         ProdutoService produtoService = RetrofitService.INSTANCE.getProdutoService();
 
-        // Faz a chamada DELETE para excluir o produto pelo ID
         Call<Void> call = produtoService.deleteProduto(productId);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // Produto excluído com sucesso
                     Log.d("API Response", "Produto excluído com sucesso");
                 } else {
-                    // Tratar resposta não bem-sucedida
                     Log.e("API Response", "Erro ao excluir produto: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Tratar falha na chamada
                 Log.e("API Failure", "Falha na chamada da API", t);
             }
         });
