@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -184,11 +185,13 @@ class AddProductActivity : AppCompatActivity() {
         uri ?: return null
         val contentResolver: ContentResolver = contentResolver
         val inputStream: InputStream? = contentResolver.openInputStream(uri)
-        val byteArray = inputStream?.readBytes()
 
-        val file = File(cacheDir, "temp_image")
+        val mimeType = contentResolver.getType(uri)
+        val fileExtension = mimeType?.let { MimeTypeMap.getSingleton().getExtensionFromMimeType(it) }
+
+        val file = File(cacheDir, "temp_image.${fileExtension ?: "temp"}")
         FileOutputStream(file).use {
-            it.write(byteArray ?: return null)
+            it.write(inputStream?.readBytes() ?: return null)
         }
 
         return file
