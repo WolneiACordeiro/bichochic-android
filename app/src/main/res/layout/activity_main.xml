@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
-                    android:text="Wolnei Cordeiro"
+                    android:text="BichoChic"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -500,7 +500,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/btn_4" />
+                            app:srcCompat="@drawable/cat5" />
 
                         <TextView
                             android:id="@+id/textView4"
@@ -508,9 +508,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:layout_weight="1"
-                            android:text="Usuário"
+                            android:text="Produtos"
                             android:textAlignment="center"
-                            android:textColor="#959595" />
+                            android:textColor="@color/black" />
                     </LinearLayout>
 
                 </LinearLayout>

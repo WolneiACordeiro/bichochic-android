@@ -10,5 +10,5 @@ data class ProdutoAdd(
     val quantidade: Int,
     val especie: String,
     val categoria: String,
-    val imagem: MultipartBody.Part?
+    val imagem: String
 )

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.EditText
@@ -115,7 +116,6 @@ class AddProductActivity : AppCompatActivity() {
             }
 
 
-
             val nomePart = createPartFromString(nome)
             val precoPart = createPartFromString(precoText)
             val descricaoPart = createPartFromString(descricao)
@@ -126,11 +126,6 @@ class AddProductActivity : AppCompatActivity() {
 
             val imagemFile = createImageFileFromUri(selectedImageUri)
             val imagemPart = createPartFromImageFile("imagem", imagemFile)
-            val imagemUpload = imagemFile?.let {
-                createPartFromImageFile("imagem", it)
-            } ?: run {
-                createPartFromString("imagem")
-            }
 
             val call = RetrofitService.produtoService.criarProduto(
                 nomePart,
@@ -171,6 +166,7 @@ class AddProductActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<ProdutoAdd>, t: Throwable) {
                     t.printStackTrace()
+                    Log.e("API_CALL", "Falha na chamada da API: ${t.message}")
                     Toast.makeText(
                         this@AddProductActivity,
                         "Falha na chamada da API",
@@ -199,8 +195,9 @@ class AddProductActivity : AppCompatActivity() {
 
     private fun createPartFromImageFile(name: String, file: File?): MultipartBody.Part? {
         file ?: return null
-        val requestBody: RequestBody =
-            RequestBody.create("image/*".toMediaTypeOrNull(), file)
+        val contentResolver: ContentResolver = contentResolver
+        val mimeType = contentResolver.getType(Uri.fromFile(file))
+        val requestBody: RequestBody = RequestBody.create(mimeType?.toMediaTypeOrNull(), file)
         return MultipartBody.Part.createFormData(name, file.name, requestBody)
     }
 }
