@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.eshopcommerce.Entity.ProdutoAdd
 import com.example.eshopcommerce.R
 import com.example.eshopcommerce.Service.RetrofitService
@@ -75,16 +76,23 @@ class UpdateProductActivity : AppCompatActivity() {
             pickImageLauncher.launch(intent)
         }
 
-        // Recuperar detalhes do produto
         val produtoCall = RetrofitService.produtoService.getProduto(productId!!)
         produtoCall.enqueue(object : retrofit2.Callback<ProdutoAdd> {
             override fun onResponse(call: Call<ProdutoAdd>, response: Response<ProdutoAdd>) {
                 if (response.isSuccessful) {
                     val produto = response.body()
-                    // Preencher os campos com os detalhes atuais
                     preencherCamposComDetalhesAtuais(produto)
+
+                    produto?.imagem?.let { imageName ->
+                        val imageUrl = "file:///android_asset/images/$imageName"
+
+                        Log.d("UpdateProductActivity", "URL da imagem: $imageUrl")
+
+                        Glide.with(this@UpdateProductActivity)
+                            .load(Uri.parse(imageUrl))
+                            .into(imgPreview)
+                    }
                 } else {
-                    // Tratar o caso em que a chamada não foi bem-sucedida
                     Toast.makeText(
                         this@UpdateProductActivity,
                         "Erro ao obter os detalhes do produto. Código: ${response.code()}",
@@ -175,7 +183,6 @@ class UpdateProductActivity : AppCompatActivity() {
             call.enqueue(object : retrofit2.Callback<ProdutoAdd> {
                 override fun onResponse(call: Call<ProdutoAdd>, response: Response<ProdutoAdd>) {
                     if (response.isSuccessful) {
-                        // Trate o sucesso da chamada
                         Toast.makeText(
                             this@UpdateProductActivity,
                             "Produto atualizado com sucesso",
@@ -189,7 +196,6 @@ class UpdateProductActivity : AppCompatActivity() {
                         // editTextQtd?.setText("")
                         // imgPreview.setImageURI(null)
                     } else {
-                        // Trate os casos em que a chamada não foi bem-sucedida
                         Toast.makeText(
                             this@UpdateProductActivity,
                             "Erro ao atualizar o produto. Código: ${response.code()}",
@@ -212,15 +218,40 @@ class UpdateProductActivity : AppCompatActivity() {
     }
 
     private fun preencherCamposComDetalhesAtuais(produto: ProdutoAdd?) {
-        // Verificar se o produto é nulo antes de preencher os campos
         produto ?: return
 
-        // Preencher os campos com os detalhes atuais do produto
         editTextNome?.setText(produto.nome)
         editTextPreco?.setText(produto.preco.toString())
         editTextDescricao?.setText(produto.descricao)
-        // Preencher os outros campos conforme necessário
+        editTextQtd?.setText(produto.quantidade.toString())
+
+
+        val tamanhoArray = resources.getStringArray(R.array.size_array)
+        val categoriaArray = resources.getStringArray(R.array.category_array)
+        val especieArray = resources.getStringArray(R.array.species_array)
+
+        val tamanhoIndex = tamanhoArray.indexOf(produto.tamanho)
+        if (tamanhoIndex != -1) {
+            spinnerSize?.setSelection(tamanhoIndex)
+        } else {
+            Log.e("UpdateProductActivity", "Tamanho do produto não encontrado na lista: ${produto.tamanho}")
+        }
+
+        val categoriaIndex = categoriaArray.indexOf(produto.categoria)
+        if (categoriaIndex != -1) {
+            spinnerCategory?.setSelection(categoriaIndex)
+        } else {
+            Log.e("UpdateProductActivity", "Categoria do produto não encontrada na lista: ${produto.categoria}")
+        }
+
+        val especieIndex = especieArray.indexOf(produto.especie)
+        if (especieIndex != -1) {
+            spinnerSpecies?.setSelection(especieIndex)
+        } else {
+            Log.e("UpdateProductActivity", "Espécie do produto não encontrada na lista: ${produto.especie}")
+        }
     }
+
 
     private fun createImageFileFromUri(uri: Uri?): File? {
         uri ?: return null
