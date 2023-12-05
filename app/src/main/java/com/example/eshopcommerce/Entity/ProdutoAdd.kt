@@ -1,8 +1,7 @@
 package com.example.eshopcommerce.Entity
 
-import okhttp3.MultipartBody
-
 data class ProdutoAdd(
+    val id: String,
     val nome: String,
     val preco: Double,
     val descricao: String,

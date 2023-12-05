@@ -1,6 +1,8 @@
 package com.example.eshopcommerce.Entity
 
-data class Produto(
+import java.io.Serializable
+
+data class Produto (
     val id: String,
     val nome: String,
     val preco: Double,
@@ -10,4 +12,4 @@ data class Produto(
     val especie: String,
     val categoria: String,
     val imagem: String
-)
+) : Serializable

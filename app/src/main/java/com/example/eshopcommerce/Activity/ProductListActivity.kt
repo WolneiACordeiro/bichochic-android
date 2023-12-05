@@ -14,6 +14,8 @@ import com.example.eshopcommerce.Service.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
+
 
 class ProductListActivity : AppCompatActivity() {
     private lateinit var productAdapter: ProductListAdapter
@@ -45,7 +47,6 @@ class ProductListActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val produtos = response.body()
                     produtos?.let {
-                        // Atualiza o adaptador com a nova lista de produtos
                         productAdapter.updateList(it)
                     }
                 } else {
@@ -54,20 +55,21 @@ class ProductListActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
-                // Log de falha, se necessário
                 Log.e("API Failure", "Falha na chamada da API", t)
             }
         })
 
         productAdapter.setOnItemClickListener(object : ProductListAdapter.OnItemClickListener {
             override fun onDeleteClick(position: Int) {
-                productAdapter.deleteProduct(position);
+                productAdapter.deleteProduct(position)
             }
 
             override fun onUpdateClick(position: Int) {
-
+                val produto = productAdapter.getProductAt(position)
+                val intent = Intent(this@ProductListActivity, UpdateProductActivity::class.java)
+                intent.putExtra("productId", produto.id)
+                startActivity(intent)
             }
-        });
-
+        })
     }
 }

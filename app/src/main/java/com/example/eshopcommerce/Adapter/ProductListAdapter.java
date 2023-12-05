@@ -48,6 +48,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         products.remove(position);
         notifyItemRemoved(position);
     }
+
     private void deleteProductApiCall(String productId) {
         ProdutoService produtoService = RetrofitService.INSTANCE.getProdutoService();
 
@@ -97,6 +98,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         products.clear();
         products.addAll(updatedList);
         notifyDataSetChanged();
+    }
+    public Produto getProductAt(int position) {
+        return products.get(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

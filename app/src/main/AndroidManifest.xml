@@ -21,6 +21,9 @@
             android:name=".Activity.AddProductActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.UpdateProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ProductListActivity"
             android:exported="false" />
         <activity
