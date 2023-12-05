@@ -134,15 +134,6 @@ class UpdateProductActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (selectedImageUri == null) {
-                Toast.makeText(
-                    this@UpdateProductActivity,
-                    "Selecione uma imagem antes de atualizar o produto",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-
             val preco = try {
                 precoText.toDouble()
             } catch (e: NumberFormatException) {

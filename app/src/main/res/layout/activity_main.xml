@@ -121,7 +121,7 @@
                         android:layout_height="150dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:srcCompat="@drawable/pic1" />
+                        app:srcCompat="@drawable/dogdog" />
 
                     <TextView
                         android:id="@+id/textView10"
@@ -195,7 +195,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/btn_3" />
+                            app:srcCompat="@drawable/ph_dog" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -228,7 +228,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/btn_3" />
+                            app:srcCompat="@drawable/ph_cat" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -255,13 +255,13 @@
 
                         <ImageView
                             android:id="@+id/imageView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="54dp"
+                            android:layout_height="57dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/btn_3" />
+                            app:srcCompat="@drawable/ph_fish" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -294,7 +294,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/cat1" />
+                            app:srcCompat="@drawable/ph_bird" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -327,7 +327,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/btn_3" />
+                            app:srcCompat="@drawable/lucide_rat" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView

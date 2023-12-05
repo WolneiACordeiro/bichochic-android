@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,12 +15,12 @@ import com.example.eshopcommerce.Service.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.Serializable
 
 
 class ProductListActivity : AppCompatActivity() {
     private lateinit var productAdapter: ProductListAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var backBtn: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class ProductListActivity : AppCompatActivity() {
         productAdapter = ProductListAdapter(ArrayList(), this)
         recyclerView.adapter = productAdapter
 
+        initView()
         loadProducts()
 
         val addProductBtn: Button = findViewById(R.id.btnAddProduct)
@@ -71,5 +73,13 @@ class ProductListActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+
+        backBtn.setOnClickListener {
+            startActivity(Intent(this@ProductListActivity, MainActivity::class.java))
+        }
+    }
+
+    private fun initView() {
+        backBtn = findViewById(R.id.backBtn)
     }
 }
