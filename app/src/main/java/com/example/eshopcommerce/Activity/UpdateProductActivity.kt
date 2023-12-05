@@ -42,6 +42,7 @@ class UpdateProductActivity : AppCompatActivity() {
     private lateinit var imgPreview: ImageView
     private var selectedImageUri: Uri? = null
     private var productId: String? = null
+    private lateinit var backBtn: ImageView
 
     private val pickImageLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -58,7 +59,7 @@ class UpdateProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_product)
         productId = intent.getStringExtra("productId").toString()
-        Log.d("UpdateProductActivity", "ID do produto recebido: $productId")
+        initView()
 
         editTextNome = findViewById(R.id.editTextNome)
         editTextPreco = findViewById(R.id.editTextPreco)
@@ -215,6 +216,13 @@ class UpdateProductActivity : AppCompatActivity() {
                 }
             })
         }
+        backBtn.setOnClickListener {
+            startActivity(Intent(this@UpdateProductActivity, ProductListActivity::class.java))
+        }
+    }
+
+    private fun initView() {
+        backBtn = findViewById(R.id.backBtn)
     }
 
     private fun preencherCamposComDetalhesAtuais(produto: ProdutoAdd?) {

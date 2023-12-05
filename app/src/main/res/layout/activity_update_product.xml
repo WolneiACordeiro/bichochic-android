@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/backBtn4"
+                android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -26,6 +26,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/arrow"
                 tools:srcCompat="@drawable/arrow" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Atualizar Produto"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/backBtn"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

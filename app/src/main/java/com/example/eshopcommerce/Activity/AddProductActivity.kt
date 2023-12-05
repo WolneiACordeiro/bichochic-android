@@ -40,6 +40,7 @@ class AddProductActivity : AppCompatActivity() {
     private var btnSelectImage: Button? = null
     private lateinit var imgPreview: ImageView
     private var selectedImageUri: Uri? = null
+    private lateinit var backBtn: ImageView
 
     private val pickImageLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -55,6 +56,7 @@ class AddProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
+        initView()
 
         editTextNome = findViewById(R.id.editTextNome)
         editTextPreco = findViewById(R.id.editTextPreco)
@@ -175,6 +177,15 @@ class AddProductActivity : AppCompatActivity() {
                 }
             })
         }
+
+        backBtn.setOnClickListener {
+            startActivity(Intent(this@AddProductActivity, ProductListActivity::class.java))
+        }
+
+    }
+
+    private fun initView() {
+        backBtn = findViewById(R.id.backBtn)
     }
 
     private fun createImageFileFromUri(uri: Uri?): File? {
